@@ -1,8 +1,8 @@
-# AgroGestor — Frontend
+# SPODOP — Frontend
 
-> 🚧 Projeto em desenvolvimento ativo
+>  Projeto em desenvolvimento ativo
 
-Interface web da plataforma **AgroGestor** — sistema voltado ao agronegócio para monitoramento climático, sugestão de janelas de aplicação de defensivos agrícolas, gestão de propriedades e talhões e geração de documentos de aplicação.
+Interface web da plataforma **SPODOP** — sistema voltado ao agronegócio para monitoramento climático, sugestão de janelas de aplicação de defensivos agrícolas, gestão de propriedades e talhões e geração de documentos de aplicação.
 
 Este repositório é o **frontend** da plataforma. O backend (API REST) está em [`LuisG-santos/spodop-api`](https://github.com/LuisG-santos/spodop-api).
 
