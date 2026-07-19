@@ -1,99 +1,149 @@
-# SPODOP Front-end
+# SPODOP — Front-end
 
-Frontend da plataforma **SPODOP**, desenvolvido para auxiliar produtores rurais no planejamento, registro e acompanhamento de aplicações de defensivos agrícolas.
+> Projeto em desenvolvimento ativo
 
-Este projeto é a interface web que consome a API do repositório [`spodop-api`](https://github.com/LuisG-santos/spodop-api).
+Frontend da plataforma **SPODOP** — interface web para autenticação, navegação e operação das funcionalidades de planejamento, registro e acompanhamento de aplicações de defensivos agrícolas, consumindo a API [`spodop-api`](https://github.com/LuisG-santos/spodop-api).
 
-## 🚀 Tecnologias
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat-square)
+![Zod](https://img.shields.io/badge/Zod-3E67B1?style=flat-square)
 
-- [Next.js](https://nextjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
+---
 
-## 📦 Requisitos
+## Funcionalidades
 
-Antes de começar, você precisa ter instalado na máquina:
+- **Interface da plataforma SPODOP** — camada visual e fluxo de interação com o usuário
+- **Autenticação (em evolução)** — integração com endpoints de autenticação da API
+- **Validação de formulários** — validação de dados com `zod` + `react-hook-form`
+- **Feedback visual de erros e ações** — notificações e padronização de mensagens
+- **Consumo centralizado da API** — cliente HTTP configurado com interceptação de erros
+- **Design system em construção** — componentes reutilizáveis em `src/components/ui`
 
-- [Node.js](https://nodejs.org/) (versão 18 ou superior recomendada)
-- npm, yarn, pnpm ou bun
+---
 
-## ⚙️ Instalação
+## Stack
 
-Clone o repositório:
+| Camada | Tecnologia |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Linguagem | TypeScript |
+| UI | React 19 |
+| Estilização | Tailwind CSS v4 |
+| Componentes | @base-ui/react + utilitários de UI |
+| Formulários | react-hook-form |
+| Validação | zod + @hookform/resolvers |
+| HTTP Client | axios |
+| Notificações | sonner |
+
+---
+
+## Arquitetura
+
+O front segue organização modular com separação por responsabilidade:
 
 ```bash
-git clone https://github.com/LuisG-santos/spodop-front.git
-cd spodop-front
+src/
+├── app/                  # Layout global, rotas e páginas (App Router)
+├── components/
+│   └── ui/               # Componentes de interface reutilizáveis
+└── lib/
+    ├── api.ts            # Instância Axios + interceptador de erros
+    ├── api/              # Módulos por domínio (ex.: auth)
+    ├── validations/      # Schemas de validação (zod)
+    ├── errors/           # Erros customizados da aplicação
+    └── utils.ts          # Helpers utilitários (cn, etc.)
 ```
 
-Instale as dependências:
+Fluxo padrão de integração com backend:
 
 ```bash
+Página/Componente → lib/api/* → Axios (api.ts) → spodop-api
+```
+
+---
+
+## Como executar localmente
+
+### Pré-requisitos
+
+- Node.js 18+
+- npm (ou yarn/pnpm/bun)
+- `spodop-api` rodando localmente ou em ambiente remoto acessível
+
+### Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/LuisG-santos/spodop-front.git
+cd spodop-front
+
+# Instale as dependências
 npm install
 ```
 
-## ▶️ Executando o projeto
+### Variáveis de ambiente
 
-Inicie o servidor de desenvolvimento:
+Crie um arquivo `.env.local` na raiz do projeto:
+
+```env
+NEXT_PUBLIC_API_URL="http://localhost:3001"
+```
+
+> Ajuste a URL para o endereço onde o `spodop-api` estiver disponível.
+
+### Rodando o projeto
 
 ```bash
 npm run dev
 ```
 
-A aplicação estará disponível em:
+Por padrão, o projeto sobe em:
 
-- [http://localhost:3000](http://localhost:3000)
+- `http://localhost:8080`
 
-## 🔌 Configuração de ambiente
+---
 
-Crie um arquivo `.env.local` na raiz do projeto com as variáveis necessárias para conexão com o backend.
+## Scripts disponíveis
 
-Exemplo:
+| Script | Descrição |
+|---|---|
+| `npm run dev` | Inicia o Next.js em desenvolvimento com Turbopack na porta `8080` |
+| `npm run build` | Gera build de produção |
+| `npm run start` | Executa a aplicação em modo produção |
+| `npm run lint` | Executa verificação de lint |
 
-```env
-NEXT_PUBLIC_API_URL=http://localhost:3001
-```
+---
 
-> Ajuste a URL conforme o ambiente em que o `spodop-api` estiver rodando.
+## Integração com o `spodop-api`
 
-## 📁 Estrutura do projeto
+Este frontend foi projetado para consumir a API do projeto:
 
-A estrutura pode variar conforme a evolução do sistema, mas de forma geral:
+- [`LuisG-santos/spodop-api`](https://github.com/LuisG-santos/spodop-api)
 
-```bash
-spodop-front/
-├── app/                # Rotas e páginas (App Router)
-├── components/         # Componentes reutilizáveis
-├── public/             # Arquivos estáticos
-├── styles/             # Estilos globais
-└── ...
-```
+Pontos atuais já implementados:
+- Configuração de `baseURL` via variável `NEXT_PUBLIC_API_URL`
+- Interceptação de erros HTTP e normalização com `ApiError`
+- Módulo inicial de autenticação (`auth/register`)
 
-## 🧩 Integração com o backend
+---
 
-Este frontend depende do backend disponível em:
+## Roadmap
 
-- [`spodop-api`](https://github.com/LuisG-santos/spodop-api)
+- [x] Base do projeto com Next.js + TypeScript + Tailwind
+- [x] Estrutura inicial de componentes UI reutilizáveis
+- [x] Cliente HTTP centralizado com tratamento de erros
+- [x] Schema inicial de validação para cadastro de usuário
+- [ ] Fluxo completo de autenticação (login, sessão, proteção de rotas)
+- [ ] Dashboard inicial com dados da API
+- [ ] Módulos de propriedades, talhões e aplicações
+- [ ] Estados de carregamento/erro padronizados por tela
+- [ ] Testes de componentes e fluxos críticos
 
-Certifique-se de que a API esteja em execução e que a variável de ambiente com a URL esteja configurada corretamente.
+---
 
-## 📜 Scripts disponíveis
+## Licença
 
-- `npm run dev` — inicia o ambiente de desenvolvimento
-- `npm run build` — gera build de produção
-- `npm run start` — executa a aplicação em produção
-- `npm run lint` — executa lint do projeto
-
-## 🤝 Contribuição
-
-Contribuições são bem-vindas.
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/minha-feature`)
-3. Commit suas alterações (`git commit -m 'feat: minha nova feature'`)
-4. Push para a branch (`git push origin feature/minha-feature`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Defina aqui a licença do projeto (ex.: MIT) caso aplicável.
+Este projeto está licenciado sob a **MIT License** — veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
