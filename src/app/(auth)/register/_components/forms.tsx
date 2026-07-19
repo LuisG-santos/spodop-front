@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Lock, LockKeyhole, Mail, PhoneIcon, User } from "lucide-react";
+import { CheckCircle2, LockKeyhole, Mail, PhoneIcon, User } from "lucide-react";
 import { useForm } from "react-hook-form";
 import {
   registerSchema,
@@ -13,6 +13,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { ApiError } from "@/lib/errors/api-error";
 import { ERROR_MESSAGES, ErrorCode } from "@/lib/errors/error-messages";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
+
 export const RegisterForm = () => {
   const {
     register,
@@ -24,11 +33,13 @@ export const RegisterForm = () => {
   });
 
   const [serverError, setServerError] = useState<string | null>(null);
+  const [successOpen, setSuccessOpen] = useState(true);
 
   const onSubmit = async (data: RegisterSchema) => {
     setServerError(null);
     try {
       await registerUser(data);
+      setSuccessOpen(true);
     } catch (error) {
       if (error instanceof ApiError) {
         const message = error.code
@@ -48,13 +59,35 @@ export const RegisterForm = () => {
     }
   };
 
+  const router = useRouter();
+
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+      <Dialog open={successOpen} onOpenChange={setSuccessOpen}>
+        <DialogContent className="flex flex-col items-center">
+          <DialogHeader className="items-center gap-2">
+            <CheckCircle2 className="text-green-600 h-20 w-20" />
+            <DialogTitle className="text-xl">
+              Cadastro realizado com sucesso!
+            </DialogTitle>
+          </DialogHeader>
+
+          <DialogDescription className="flex flex-col text-md items-center">
+            Faça login com sua conta para continuar
+            <Button
+              onClick={() => router.push("/login")}
+              className="bg-green-700 text-white hover:bg-green-800 h-12 w-30 mt-4"
+            >
+              Login
+            </Button>
+          </DialogDescription>
+        </DialogContent>
+      </Dialog>
+
       <Card className="flex flex-col gap-3 p-4">
         <div className="relative">
           <p>Nome completo</p>
           <div className="relative">
-
             <User className="absolute left-2 top-1/2 -translate-y-1/2 size-5 text-green-700" />
 
             <input
