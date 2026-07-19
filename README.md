@@ -17,13 +17,13 @@ Este repositório é o **frontend** da plataforma. O backend (API REST) está em
 
 ## Funcionalidades
 
-- 🌦️ **Monitoramento climático** — visualização de condições meteorológicas por propriedade
-- 🪣 **Janelas de aplicação** — exibição de períodos ideais para aplicação de defensivos com base no clima
-- 🏡 **Gestão de propriedades e talhões** — cadastro, edição e acompanhamento
-- 📋 **Registro de aplicações** — interface para controle de produtos, doses e tipos de defensivo
-- 📄 **Geração de documentos** — exportação dos registros de aplicação
-- 🔐 **Autenticação** — cadastro e login integrados à API com JWT
-- 🤖 **IA (em breve)** — integração com a Claude API para assistência inteligente ao produtor
+-  **Monitoramento climático** — visualização de condições meteorológicas por propriedade
+-  **Janelas de aplicação** — exibição de períodos ideais para aplicação de defensivos com base no clima
+-  **Gestão de propriedades e talhões** — cadastro, edição e acompanhamento
+-  **Registro de aplicações** — interface para controle de produtos, doses e tipos de defensivo
+-  **Geração de documentos** — exportação dos registros de aplicação
+-  **Autenticação** — cadastro e login integrados à API com JWT
+-  **IA (em breve)** — integração com a Claude API para assistência inteligente ao produtor
 
 ---
 
