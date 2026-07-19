@@ -5,7 +5,7 @@ const phoneNumberRegex = /^(?:\+?55\s?)?(?:\(?([1-9][1-9])\)?\s?)(?:((?:9\d|[2-9
 export const registerSchema = z
   .object({
     name: z.string().min(3, "O nome deve ter no mínimo 3 caracteres"),
-    email: z.string().email("Email inválido"),
+    email: z.email("E-mail inválido"),
     phoneNumber: z
       .string()
       .regex(phoneNumberRegex, "Número de telefone inválido"),
