@@ -34,18 +34,18 @@ const RegisterPage = () => {
             height={100}
             style={{ width: "auto", height: "auto" }}
           />
-          <h2 className="text-md font-semibold text-gray-800">Crie sua conta para começar</h2>
-          <p className="text-sm text-zinc-500">
+          <h2 className="text-xl font-semibold text-gray-800">Crie sua conta para começar</h2>
+          <p className="text-md text-zinc-500">
             Gerencie suas propriedades e aplicações
           </p>
-          <p className="text-sm text-zinc-500">de forma eficiente</p>
+          <p className="text-md text-zinc-500">de forma eficiente</p>
         </div>
         <div>
           <RegisterForm/>
           <div className="flex flex-col justify-center items-center gap-1 p-4">
-            <p className="text-sm">
+            <p className="text-sm ">
               Já tem uma conta?{" "}
-              <a href="/login" className="text-green-700">
+              <a href="/login" className="text-green-700 font-bold">
                 Entrar
               </a>
             </p>

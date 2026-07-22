@@ -33,7 +33,7 @@ export const RegisterForm = () => {
   });
 
   const [serverError, setServerError] = useState<string | null>(null);
-  const [successOpen, setSuccessOpen] = useState(true);
+  const [successOpen, setSuccessOpen] = useState(false);
 
   const onSubmit = async (data: RegisterSchema) => {
     setServerError(null);
