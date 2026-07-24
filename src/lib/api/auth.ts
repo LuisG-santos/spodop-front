@@ -7,5 +7,5 @@ export const registerUser = (data: Omit<RegisterSchema, 'confirmPassword'>) => {
 }
 
 export const loginUser = (data: LoginSchema) => {
-   return api.post('auth/login', data)
+   return api.post<{ user: { id: string; name: string; email: string } }>('auth/login', data)
 }

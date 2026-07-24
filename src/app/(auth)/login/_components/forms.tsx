@@ -12,6 +12,7 @@ import { ApiError } from "@/lib/errors/api-error";
 import { ERROR_MESSAGES, ErrorCode } from "@/lib/errors/error-messages";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useUserStore } from "@/store/userStore";
 
 export const LoginForm = () => {
   const {
@@ -24,6 +25,7 @@ export const LoginForm = () => {
   });
 
   const [serverError, setServerError] = useState<string | null>(null);
+  const {setUser} = useUserStore()
   
   const router = useRouter();
   
@@ -31,7 +33,8 @@ export const LoginForm = () => {
   const onSubmit = async (data: LoginSchema) => {
     setServerError(null);
     try {
-      await loginUser(data);
+      const {data: {user}} = await loginUser(data);
+      setUser(user)
       router.push('/home')
     } catch (error) {
       if (error instanceof ApiError) {
