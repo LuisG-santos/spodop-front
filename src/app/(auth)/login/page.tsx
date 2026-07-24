@@ -1,11 +1,10 @@
 "use client";
-import { useRouter } from "next/navigation";
+
 import Image from "next/image";
 import { LoginForm } from "./_components/forms";
 import { IconLeafFilled } from '@tabler/icons-react';
 
-const RegisterPage = () => {
-  const router = useRouter();
+const LoginPage = () => {
   return (
     <div className="relative flex flex-col min-h-screen">
       <div className="absolute inset-0 bg-[url(/foreground.PNG)] bg-auto opacity-70 -z-10" />
@@ -69,4 +68,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default LoginPage;
