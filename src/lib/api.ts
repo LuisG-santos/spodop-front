@@ -7,6 +7,12 @@ export const api = axios.create({
 })
 
 api.interceptors.response.use((res) => res, (error) => {
+    
+      if(axios.isAxiosError(error) && error.response?.status === 401) {
+        window.location.href = "/login?session=expired";
+        return Promise.reject(error);
+    }
+
     if(axios.isAxiosError(error) && error.response?.data?.message){
         const {message, field, code} = error.response.data;
         return Promise.reject(new ApiError(message, field, code))
