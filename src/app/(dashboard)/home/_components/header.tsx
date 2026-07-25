@@ -28,8 +28,8 @@ export const HeaderHomePage = () => {
           style={{ width: "140px", height: "auto" }}
         />
 
-        <span className="flex justify-center items-center shrink-0 bg-green-300/20 rounded-full w-8 h-8 text-green-800">
-          <Bell className="w-5 h-5" />
+        <span className="flex justify-center items-center shrink-0 bg-green-300/20 rounded-full w-10 h-10 text-green-800">
+          <Bell strokeWidth={2.3} className="w-5 h-5" />
         </span>
       </div>
 
