@@ -35,6 +35,7 @@ export const LoginForm = () => {
     try {
       const {data: {user}} = await loginUser(data);
       setUser(user)
+      console.log("redirecionando para home")
       router.push('/home')
     } catch (error) {
       if (error instanceof ApiError) {
