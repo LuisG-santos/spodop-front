@@ -1,21 +1,18 @@
-"use client";
-
 import Image from "next/image";
-import { useUserStore } from "@/store/userStore";
-import { useEffect } from "react";
-import { getUser } from "@/lib/api/user";
 import { Bell } from "lucide-react";
+import { cookies } from "next/headers";
 
-export const HeaderHomePage = () => {
-  const { user, setUser } = useUserStore();
+export const HeaderHomePage = async () => {
+  const cookieStore = await cookies();
+  const response = await fetch("https://api.spodop.com.br/user/me", {
+    headers: { Cookie: cookieStore.toString() },
+  });
 
-  useEffect(() => {
-    getUser().then(({ data }) => {
-      setUser(data);
-    });
-  }, [setUser]);
+  const user = await response.json();
 
   const firstName = user?.name.split(" ")[0];
+  const lastName = user?.name.split(" ")[1];
+
   return (
     <div className="pb-5 flex flex-col gap-2 w-full">
       <div className="flex justify-between items-center">
@@ -34,7 +31,7 @@ export const HeaderHomePage = () => {
       </div>
 
       <div>
-        <h3 className="font-semibold text-xl">Olá, {firstName}!</h3>
+        <h3 className="font-semibold text-xl">Olá, {firstName} {lastName}!</h3>
         <p className="text-sm font-semibold text-gray-600">
           Aqui está o resumo da sua operação
         </p>
