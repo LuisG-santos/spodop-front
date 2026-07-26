@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { LockKeyhole, Mail} from "lucide-react";
+import { LockKeyhole, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { loginSchema, LoginSchema } from "@/lib/validations/users/login.schema";
 import { loginUser } from "@/lib/api/auth";
@@ -10,7 +10,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { ApiError } from "@/lib/errors/api-error";
 import { ERROR_MESSAGES, ErrorCode } from "@/lib/errors/error-messages";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useUserStore } from "@/store/userStore";
 
@@ -25,17 +24,16 @@ export const LoginForm = () => {
   });
 
   const [serverError, setServerError] = useState<string | null>(null);
-  const {setUser} = useUserStore()
-  
-  const router = useRouter();
+  const { setUser } = useUserStore();
 
   const onSubmit = async (data: LoginSchema) => {
     setServerError(null);
     try {
-      const {data: {user}} = await loginUser(data);
-      setUser(user)
-      window.location.replace('/home')
-      
+      const {
+        data: { user },
+      } = await loginUser(data);
+      setUser(user);
+      window.location.replace("/home");
     } catch (error) {
       if (error instanceof ApiError) {
         const message = error.code
@@ -54,8 +52,6 @@ export const LoginForm = () => {
       setServerError((error as Error).message);
     }
   };
-
-  
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
@@ -95,7 +91,10 @@ export const LoginForm = () => {
                 {errors.password.message}
               </p>
             )}
-            <Link href="" className="text-sm text-green-700 mt-1 hover:text-green-500 ml-auto">
+            <Link
+              href=""
+              className="text-sm text-green-700 mt-1 hover:text-green-500 ml-auto"
+            >
               Esqueci minha senha
             </Link>
           </div>
@@ -106,7 +105,7 @@ export const LoginForm = () => {
         )}
         <Button
           className="bg-green-700 text-white hover:bg-green-800 h-12 mt-4"
-          disabled ={isSubmitting}
+          disabled={isSubmitting}
           type="submit"
         >
           {isSubmitting ? "Entrando..." : "Entrar"}
