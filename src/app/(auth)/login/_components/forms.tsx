@@ -28,14 +28,14 @@ export const LoginForm = () => {
   const {setUser} = useUserStore()
   
   const router = useRouter();
-  
 
   const onSubmit = async (data: LoginSchema) => {
     setServerError(null);
     try {
       const {data: {user}} = await loginUser(data);
       setUser(user)
-      router.push('/home')
+      window.location.replace('/home')
+      
     } catch (error) {
       if (error instanceof ApiError) {
         const message = error.code
