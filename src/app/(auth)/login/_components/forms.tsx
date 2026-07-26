@@ -12,7 +12,7 @@ import { ApiError } from "@/lib/errors/api-error";
 import { ERROR_MESSAGES, ErrorCode } from "@/lib/errors/error-messages";
 import Link from "next/link";
 import { useUserStore } from "@/store/userStore";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
   const {
